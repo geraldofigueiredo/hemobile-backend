@@ -3,27 +3,32 @@ INSERT INTO "user" (
     "uuid",
     "email",
     "password",
-    "blood_type"
+    "blood_type",
+    "name"
 ) VALUES (
     uuid_generate_v4(),
     'geraldo@email.com',
     '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
-    'O-'
+    'O-',
+    'Geraldo Figueiredo'
 ), (
     uuid_generate_v4(),
     'cleanderson@email.com',
     '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
-    'A+'
+    'A+',
+    'Cleanderson Lins'
 ), (
     uuid_generate_v4(),
     'wagner@email.com',
     '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
-    'B-'
+    'B-',
+    'Wagner Garcia'
 ), (
      uuid_generate_v4(),
-    'geraldo@email.com',
+    'diego@email.com',
     '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
-    'AB+'
+    'AB+',
+    'Diego Reis'
 );
 
 -- BLOOD CENTERS
