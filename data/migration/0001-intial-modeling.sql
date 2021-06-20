@@ -9,12 +9,15 @@ CREATE TYPE donation_status AS ENUM ('pending', 'completed');
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "uuid" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
+    "email" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "blood_type" blood_types NOT NULL,
-    "naturality" TEXT NULL DEFAULT '',
-    "cpf" TEXT NULL DEFAULT '',
-    "donor_number" TEXT NULL DEFAULT ''
+    "name" TEXT NOT NULL,
+    "naturality" TEXT NULL,
+    "cpf" TEXT NULL,
+    "donor_number" TEXT NULL,
+    "created_at" DATE NOT NULL DEFAULT CURRENT_DATE,
+    "updated_at" DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 CREATE TABLE "blood_center" (

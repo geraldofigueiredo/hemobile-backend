@@ -39,18 +39,16 @@ class ConfigService {
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
 
-      entities: ['**/*.entity{.ts,.js}'],
+      synchronize: false,
 
-      migrationsTableName: 'migration',
-
-      migrations: ['src/migration/*.ts'],
-
-      cli: {
-        migrationsDir: 'src/migration',
-      },
+      entities: ['dist/**/*.entity{.ts,.js}'],
 
       ssl: this.isProduction(),
     };
+  }
+
+  public getCryptSalt(): string {
+    return this.getValue('SALT');
   }
 }
 
