@@ -1,6 +1,7 @@
 import {
   ForbiddenException,
   Injectable,
+  InternalServerErrorException,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -24,13 +25,14 @@ export class UsersService {
     if (await this.emailExists(createUserDto.email)) {
       throw new UnprocessableEntityException(errors.USERS.EMAIL_ALREADY_EXISTS);
     }
+
     createUserDto.password = await bcrypt.hash(
       createUserDto.password,
       this.salt,
     );
 
     try {
-      const response = this.repo
+      const response = await this.repo
         .createQueryBuilder()
         .insert()
         .into(User)
@@ -39,7 +41,7 @@ export class UsersService {
 
       return response;
     } catch (error) {
-      console.log('error: ', error);
+      throw new InternalServerErrorException(errors.USERS.ERROR_CREATE_USER);
     }
   }
 
