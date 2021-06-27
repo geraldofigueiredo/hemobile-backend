@@ -1,4 +1,4 @@
-import { OmitType, PartialType, PickType } from '@nestjs/mapped-types';
+import { OmitType } from '@nestjs/mapped-types';
 import { User } from '../entities/user.entity';
 
 export class UserResponseDto extends OmitType(User, [
