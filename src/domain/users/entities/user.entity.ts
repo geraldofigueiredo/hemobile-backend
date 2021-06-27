@@ -21,4 +21,7 @@ export class User extends BaseEntity {
 
   @Column({ name: 'cpf' })
   cpf: string;
+
+  @Column({ name: 'donor_number' })
+  donorNumber: string;
 }

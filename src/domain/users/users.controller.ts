@@ -6,27 +6,29 @@ import {
   Patch,
   Param,
   Delete,
-  BadRequestException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseDto } from './dto/user.response.dto';
 import { LoginDto } from './dto/login.dto';
-import errors from 'src/common/constants/errors';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const createResult = await this.usersService.create(createUserDto);
+    const user = await this.usersService.findByID(
+      createResult.identifiers[0].id,
+    );
+    return { uuid: user.uuid };
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<UserResponseDto> {
-    const user = await this.usersService.findOne(+id);
+  @Get(':uuid')
+  async findOne(@Param('uuid') id: string): Promise<UserResponseDto> {
+    const user = await this.usersService.findByUUID(id);
     return new UserResponseDto(user);
   }
 
@@ -41,7 +43,13 @@ export class UsersController {
   }
 
   @Post('/login')
-  login(@Body() loginDto: LoginDto) {
-    return this.usersService.login(loginDto.email, loginDto.password);
+  async login(@Body() loginDto: LoginDto) {
+    const user = await this.usersService.login(
+      loginDto.email,
+      loginDto.password,
+    );
+
+    console.log(user);
+    return new UserResponseDto(user);
   }
 }

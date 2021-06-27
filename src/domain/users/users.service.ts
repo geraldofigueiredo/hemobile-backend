@@ -64,7 +64,7 @@ export class UsersService {
       .getOne();
   }
 
-  async findOne(id: number): Promise<User> {
+  async findByID(id: string): Promise<User> {
     return this.repo
       .createQueryBuilder()
       .select('user')
@@ -73,8 +73,17 @@ export class UsersService {
       .getOne();
   }
 
+  async findByUUID(uuid: string): Promise<User> {
+    return this.repo
+      .createQueryBuilder()
+      .select('user')
+      .from(User, 'user')
+      .where('user.uuid = :uuid', { uuid: uuid })
+      .getOne();
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    return `This action updates a #${id} user ${updateUserDto}`;
   }
 
   remove(id: number) {

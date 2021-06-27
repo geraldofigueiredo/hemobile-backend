@@ -14,5 +14,6 @@ export class UserResponseDto extends OmitType(User, [
     this.cpf = user.cpf;
     this.naturality = user.naturality;
     this.name = user.name;
+    this.uuid = user.uuid;
   }
 }
