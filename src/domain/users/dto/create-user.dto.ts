@@ -1,4 +1,11 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsNumberString,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import BloodTypes from 'src/common/constants/blood-type';
 
 export class CreateUserDto {
@@ -17,4 +24,16 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   name: string;
+
+  @IsOptional()
+  @IsString()
+  donorNumber: string;
+
+  @IsOptional()
+  @IsString()
+  naturality: string;
+
+  @IsOptional()
+  @IsNumberString()
+  cpf: string;
 }
