@@ -64,12 +64,21 @@ export class UsersService {
       .getOne();
   }
 
-  async findOne(id: number): Promise<User> {
+  async findByID(id: string): Promise<User> {
     return this.repo
       .createQueryBuilder()
       .select('user')
       .from(User, 'user')
       .where('user.id = :id', { id: id })
+      .getOne();
+  }
+
+  async findByUUID(uuid: string): Promise<User> {
+    return this.repo
+      .createQueryBuilder()
+      .select('user')
+      .from(User, 'user')
+      .where('user.uuid = :uuid', { uuid: uuid })
       .getOne();
   }
 
