@@ -2,8 +2,9 @@ import BaseEntity from 'src/common/base/entity';
 import DonationStatus from 'src/common/constants/donation-status';
 import { DemandBlood } from 'src/domain/demand-blood/entities/demand-blood.entity';
 import { User } from 'src/domain/users/entities/user.entity';
-import { Column, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
+@Entity()
 export class Donation extends BaseEntity {
   @Column({ name: 'status' })
   status: DonationStatus;

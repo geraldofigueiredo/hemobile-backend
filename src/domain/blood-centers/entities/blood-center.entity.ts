@@ -7,8 +7,8 @@ export class BloodCenter extends BaseEntity {
   @Column({ name: 'name' })
   name: string;
 
-  @Column({ name: 'pictures' })
-  pictures: string;
+  @Column({ name: 'picture' })
+  picture: string;
 
   @Column({ name: 'address' })
   address: string;
