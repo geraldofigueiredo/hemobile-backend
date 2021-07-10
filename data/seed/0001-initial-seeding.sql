@@ -75,16 +75,6 @@ BEGIN
 END
 $func$ LANGUAGE plpgsql VOLATILE;
 
-CREATE FUNCTION random_blood_type()
-  RETURNS text AS
-$func$
-DECLARE
-  a text[] := '{A+, A-, B+, B-, AB+, AB-, O+, O-}';
-BEGIN
-  RETURN a[floor((random()*9+1))::int];
-END
-$func$ LANGUAGE plpgsql VOLATILE;
-
 -- DEMANDS
 INSERT INTO "demand" (
     "uuid",
@@ -95,3 +85,103 @@ INSERT INTO "demand" (
     trunc(RANDOM()*5+1),
     'Evento do hemocentro'
 FROM GENERATE_SERIES(1,20);
+
+-- DEMAND_BLOOD
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'B+',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(5,15) iter;
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'B-',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(15,20) iter;
+
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'A+',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(1,10) iter;
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'A-',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(1,15) iter;
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'O-',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(1,20) iter;
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'O+',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(1,20) iter;
+
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'AB+',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(1,20) iter;
+
+INSERT INTO "demand_blood" (
+    "uuid",
+    "demand_id",
+    "blood_type",
+    "requested"
+) SELECT
+    uuid_generate_v4(),
+    iter,
+    'AB-',
+    trunc(RANDOM()*10+1)
+FROM GENERATE_SERIES(5,10) iter;

@@ -3,6 +3,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ENUMS
 CREATE TYPE blood_types AS ENUM ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-');
+
 CREATE TYPE donation_status AS ENUM ('pending', 'completed');
 
 -- TABLES
@@ -26,7 +27,9 @@ CREATE TABLE "blood_center" (
     "name" TEXT NOT NULL,
     "picture" TEXT NOT NULL DEFAULT '',
     "address" TEXT NOT NULL DEFAULT '',
-    "phone" TEXT NOT NULL DEFAULT ''
+    "phone" TEXT NOT NULL DEFAULT '',
+    "created_at" DATE NOT NULL DEFAULT CURRENT_DATE,
+    "updated_at" DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 CREATE TABLE "demand" (
@@ -34,6 +37,8 @@ CREATE TABLE "demand" (
     "uuid" TEXT NOT NULL,
     "blood_center_id" INT NOT NULL,
     "text" TEXT NULL DEFAULT '',
+    "created_at" DATE NOT NULL DEFAULT CURRENT_DATE,
+    "updated_at" DATE NOT NULL DEFAULT CURRENT_DATE,
 
     constraint demand_blood_center_id_fk
 		foreign key (blood_center_id) references blood_center (id)
@@ -45,6 +50,8 @@ CREATE TABLE "demand_blood" (
     "demand_id" INT NOT NULL,
     "blood_type" blood_types NOT NULL,
     "requested" INT NOT NULL,
+    "created_at" DATE NOT NULL DEFAULT CURRENT_DATE,
+    "updated_at" DATE NOT NULL DEFAULT CURRENT_DATE,
 
     constraint demand_blood_demand_id_fk
 		foreign key (demand_id) references demand (id)
@@ -54,6 +61,8 @@ CREATE TABLE "donation" (
     "demand_blood_id" INT NOT NULL,
     "user_id" INT NOT NULL,
     "status" donation_status NOT NULL DEFAULT 'pending',
+    "created_at" DATE NOT NULL DEFAULT CURRENT_DATE,
+    "updated_at" DATE NOT NULL DEFAULT CURRENT_DATE,
 
     constraint donation_demand_blood_id_fk
 		foreign key (demand_blood_id) references demand_blood (id),
