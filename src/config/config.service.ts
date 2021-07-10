@@ -29,6 +29,15 @@ class ConfigService {
     return mode != 'development';
   }
 
+  public getSSL() {
+    const mode = this.getValue('NODE_ENV', false);
+    if (mode == 'development') {
+      return false;
+    } else {
+      return { rejectUnauthorized: false };
+    }
+  }
+
   public getTypeOrmConfig(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
@@ -39,7 +48,7 @@ class ConfigService {
 
       entities: ['dist/**/*.entity{.ts,.js}'],
 
-      ssl: { rejectUnauthorized: false },
+      ssl: this.getSSL(),
     };
   }
 

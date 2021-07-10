@@ -17,7 +17,7 @@ import { LoginDto } from './dto/login.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('/')
   async create(@Body() createUserDto: CreateUserDto) {
     const createResult = await this.usersService.create(createUserDto);
     const user = await this.usersService.findByID(
