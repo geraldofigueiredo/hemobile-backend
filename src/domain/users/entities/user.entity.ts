@@ -1,6 +1,7 @@
 import BaseEntity from 'src/common/base/entity';
 import BloodTypes from 'src/common/constants/blood-type';
-import { Column, Entity } from 'typeorm';
+import { Donation } from 'src/domain/donations/entities/donation.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -24,4 +25,7 @@ export class User extends BaseEntity {
 
   @Column({ name: 'donor_number' })
   donorNumber: string;
+
+  @ManyToOne(() => Donation, (donation) => donation.user)
+  donations: Donation;
 }
