@@ -58,6 +58,8 @@ CREATE TABLE "demand_blood" (
 );
 
 CREATE TABLE "donation" (
+    "id" SERIAL PRIMARY KEY,
+    "uuid" TEXT NOT NULL,
     "demand_blood_id" INT NOT NULL,
     "user_id" INT NOT NULL,
     "status" donation_status NOT NULL DEFAULT 'pending',

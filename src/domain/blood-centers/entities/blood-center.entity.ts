@@ -1,6 +1,6 @@
 import BaseEntity from 'src/common/base/entity';
 import { Demand } from 'src/domain/demands/entities/demand.entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class BloodCenter extends BaseEntity {

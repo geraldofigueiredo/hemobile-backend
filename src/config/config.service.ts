@@ -49,6 +49,8 @@ class ConfigService {
       entities: ['dist/**/*.entity{.ts,.js}'],
 
       ssl: this.getSSL(),
+
+      logging: true,
     };
   }
 

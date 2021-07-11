@@ -8,7 +8,9 @@ export class BloodCentersController {
 
   @Get()
   async findAll() {
-    const bloodCenters = await this.bloodCentersService.findAll();
+    const bloodCenters =
+      await this.bloodCentersService.findAllCompleteRelations();
+
     return bloodCenters.map(
       (bloodCenter) => new BloodCenterResponseDto(bloodCenter),
     );

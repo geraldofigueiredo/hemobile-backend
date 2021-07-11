@@ -14,6 +14,16 @@ export class BloodCentersService {
     return this.repo.find();
   }
 
+  findAllCompleteRelations() {
+    return this.repo.find({
+      relations: [
+        'demands',
+        'demands.demandBloods',
+        'demands.demandBloods.donations',
+      ],
+    });
+  }
+
   findOne(uuid: string) {
     return this.repo.findOneOrFail({
       where: {

@@ -1,7 +1,7 @@
 import BaseEntity from 'src/common/base/entity';
 import { BloodCenter } from 'src/domain/blood-centers/entities/blood-center.entity';
 import { DemandBlood } from 'src/domain/demand-blood/entities/demand-blood.entity';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Demand extends BaseEntity {
@@ -9,6 +9,7 @@ export class Demand extends BaseEntity {
   text: string;
 
   @ManyToOne(() => BloodCenter, (bloodCenter) => bloodCenter.demands)
+  @JoinColumn({ name: 'blood_center_id' })
   bloodCenter: BloodCenter;
 
   @OneToMany(() => DemandBlood, (demandBlood) => demandBlood.demand)
