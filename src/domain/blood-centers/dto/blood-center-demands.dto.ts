@@ -51,6 +51,10 @@ export class BloodCenterDemandsDto extends OmitType(BloodCenter, [
       );
       const collected = completedDonations.length;
 
+      if (requested <= 0) {
+        continue;
+      }
+
       this.demands.push(
         new BloodCenterDemandDto(BloodTypes[btype], requested, collected),
       );

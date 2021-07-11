@@ -16,6 +16,16 @@ const errors = {
       name: 'ERROR_CREATE_USER',
       message: 'erro ao criar usuário',
     },
+    USER_NOT_FOUND: {
+      name: 'USER_NOT_FOUND',
+      message: 'usuário não encontrado',
+    },
+  },
+  BLOOD_CENTER: {
+    BLOOD_CENTER_NOT_FOUND: {
+      name: 'BLOOD_CENTER_NOT_FOUND',
+      message: 'hemocentro não encontrado',
+    },
   },
 };
 

@@ -1,7 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import DonationStatus from 'src/common/constants/donation-status';
+import errors from 'src/common/constants/errors';
 import { Repository } from 'typeorm';
+import { UsersService } from '../users/users.service';
 import { CreateDonationDto } from './dto/create-donation.dto';
 import { Donation } from './entities/donation.entity';
 
@@ -9,28 +15,39 @@ import { Donation } from './entities/donation.entity';
 export class DonationsService {
   constructor(
     @InjectRepository(Donation) private readonly repo: Repository<Donation>,
+    @Inject(UsersService) private readonly usersService: UsersService,
   ) {}
 
   create(createDonationDto: CreateDonationDto) {
     return 'This action adds a new donation';
   }
 
-  findHistory(userUuid: string) {
+  async findHistory(userUuid: string) {
+    const user = await this.usersService.findByUUID(userUuid);
+    if (!user) {
+      throw new InternalServerErrorException(errors.USERS.USER_NOT_FOUND);
+    }
+
     return this.repo.find({
       where: {
         user: {
-          uuid: userUuid,
+          id: user.id,
         },
         status: DonationStatus.COMPLETED,
       },
     });
   }
 
-  findAppointments(userUuid: string) {
+  async findAppointments(userUuid: string) {
+    const user = await this.usersService.findByUUID(userUuid);
+    if (!user) {
+      throw new InternalServerErrorException(errors.USERS.USER_NOT_FOUND);
+    }
+
     return this.repo.find({
       where: {
         user: {
-          uuid: userUuid,
+          id: user.id,
         },
         status: DonationStatus.PENDING,
       },

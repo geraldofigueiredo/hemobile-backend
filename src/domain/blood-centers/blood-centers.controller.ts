@@ -1,4 +1,10 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  InternalServerErrorException,
+  Param,
+} from '@nestjs/common';
+import errors from 'src/common/constants/errors';
 import { BloodCentersService } from './blood-centers.service';
 import { BloodCenterDemandsDto } from './dto/blood-center-demands.dto';
 import { BloodCenterResponseDto } from './dto/blood-center.response.dto';
@@ -20,6 +26,11 @@ export class BloodCentersController {
   @Get(':uuid')
   async findOne(@Param('uuid') uuid: string) {
     const bloodCenter = await this.bloodCentersService.findOne(uuid);
+    if (!bloodCenter) {
+      throw new InternalServerErrorException(
+        errors.BLOOD_CENTER.BLOOD_CENTER_NOT_FOUND,
+      );
+    }
     return new BloodCenterDemandsDto(bloodCenter);
   }
 }

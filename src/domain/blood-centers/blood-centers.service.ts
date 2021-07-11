@@ -21,7 +21,7 @@ export class BloodCentersService {
   }
 
   findOne(uuid: string) {
-    return this.repo.findOneOrFail({
+    return this.repo.findOne({
       where: {
         uuid,
       },
