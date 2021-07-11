@@ -92,6 +92,11 @@ export class UsersService {
 
   async login(email: string, password: string) {
     const userDB = await this.findByEmail(email);
+    if (!userDB) {
+      throw new InternalServerErrorException(
+        errors.USERS.PASSWORD_EMAIL_DO_NOT_MATCH,
+      );
+    }
     const isMatch = await bcrypt.compare(password, userDB.password);
 
     if (!isMatch) {
