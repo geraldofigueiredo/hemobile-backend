@@ -1,5 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { BloodCentersService } from './blood-centers.service';
+import { BloodCenterDemandsDto } from './dto/blood-center-demands.dto';
 import { BloodCenterResponseDto } from './dto/blood-center.response.dto';
 
 @Controller('blood-centers')
@@ -16,9 +17,9 @@ export class BloodCentersController {
     );
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const bloodCenter = await this.bloodCentersService.findOne(id);
-    return new BloodCenterResponseDto(bloodCenter);
+  @Get(':uuid')
+  async findOne(@Param('uuid') uuid: string) {
+    const bloodCenter = await this.bloodCentersService.findOne(uuid);
+    return new BloodCenterDemandsDto(bloodCenter);
   }
 }

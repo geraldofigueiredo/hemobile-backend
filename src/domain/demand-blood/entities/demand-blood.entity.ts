@@ -15,7 +15,4 @@ export class DemandBlood extends BaseEntity {
   @ManyToOne(() => Demand, (demand) => demand.demandBloods)
   @JoinColumn({ name: 'demand_id' })
   demand: Demand;
-
-  @OneToMany(() => Donation, (donation) => donation.demandBlood)
-  donations: Donation[];
 }

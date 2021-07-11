@@ -16,11 +16,7 @@ export class BloodCentersService {
 
   findAllCompleteRelations() {
     return this.repo.find({
-      relations: [
-        'demands',
-        'demands.demandBloods',
-        'demands.demandBloods.donations',
-      ],
+      relations: ['demands', 'demands.demandBloods', 'donations'],
     });
   }
 
@@ -29,6 +25,7 @@ export class BloodCentersService {
       where: {
         uuid,
       },
+      relations: ['demands', 'demands.demandBloods', 'donations'],
     });
   }
 }
