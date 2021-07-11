@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { DonationsService } from './donations.service';
 import { CreateDonationDto } from './dto/create-donation.dto';
-import { UpdateDonationDto } from './dto/update-donation.dto';
+import { DonationResponseDto } from './dto/donation.response.dto';
 
 @Controller('donations')
 export class DonationsController {
@@ -12,23 +12,15 @@ export class DonationsController {
     return this.donationsService.create(createDonationDto);
   }
 
-  @Get()
-  findAll() {
-    return this.donationsService.findAll();
+  @Get('/history/:uuid')
+  async findHistory(@Param('uuid') userUuid: string) {
+    const donations = await this.donationsService.findHistory(userUuid);
+    return donations.map((donation) => new DonationResponseDto(donation));
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.donationsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDonationDto: UpdateDonationDto) {
-    return this.donationsService.update(+id, updateDonationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.donationsService.remove(+id);
+  @Get('/appointments/:uuid')
+  async findAppointments(@Param('uuid') userUuid: string) {
+    const donations = await this.donationsService.findAppointments(userUuid);
+    return donations.map((donation) => new DonationResponseDto(donation));
   }
 }

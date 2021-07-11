@@ -47,7 +47,7 @@ export class BloodCenterDemandsDto extends OmitType(BloodCenter, [
       const completedDonations = bloodCenter.donations.filter(
         (donation) =>
           donation.bloodType == BloodTypes[btype] &&
-          donation.status == DonationStatus.SUCCESSFUL,
+          donation.status == DonationStatus.COMPLETED,
       );
       const collected = completedDonations.length;
 

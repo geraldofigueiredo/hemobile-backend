@@ -37,7 +37,7 @@ export class BloodCenterResponseDto extends OmitType(BloodCenter, [
     });
 
     bloodCenter.donations.forEach((donation) => {
-      this.collected += donation.status == DonationStatus.SUCCESSFUL ? 1 : 0;
+      this.collected += donation.status == DonationStatus.COMPLETED ? 1 : 0;
     });
 
     this.bloodTypes = this.bloodTypes.filter(
