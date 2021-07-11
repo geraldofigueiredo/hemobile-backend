@@ -54,8 +54,9 @@ class ConfigService {
     };
   }
 
-  public getCryptSalt(): string {
-    return this.getValue('SALT');
+  public getCryptSalt(): number {
+    const salt = this.getValue('SALT', true);
+    return +salt;
   }
 }
 

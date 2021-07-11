@@ -8,25 +8,25 @@ INSERT INTO "user" (
 ) VALUES (
     uuid_generate_v4(),
     'geraldo@email.com',
-    '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
+    '$2y$12$UJvpWUyE5ys2luIiRj.8Heo1U56jzEIFp9oTia00wXExuIFsN6DXO',
     'O-',
     'Geraldo Figueiredo'
 ), (
     uuid_generate_v4(),
     'cleanderson@email.com',
-    '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
+    '$2y$12$UJvpWUyE5ys2luIiRj.8Heo1U56jzEIFp9oTia00wXExuIFsN6DXO',
     'A+',
     'Cleanderson Lins'
 ), (
     uuid_generate_v4(),
     'wagner@email.com',
-    '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
+    '$2y$12$UJvpWUyE5ys2luIiRj.8Heo1U56jzEIFp9oTia00wXExuIFsN6DXO',
     'B-',
     'Wagner Garcia'
 ), (
      uuid_generate_v4(),
     'diego@email.com',
-    '$2a$04$z.BwVqK2SysdLRp9vTczvuJZxxTz5cHcSXz.0wuA4ST6g0v0KiJlm',
+    '$2y$12$UJvpWUyE5ys2luIiRj.8Heo1U56jzEIFp9oTia00wXExuIFsN6DXO',
     'AB+',
     'Diego Reis'
 );
@@ -63,17 +63,6 @@ INSERT INTO "blood_center" (
     '',
     ''
 );
-
--- RANDOM METHODS
-CREATE FUNCTION random_person_name()
-  RETURNS text AS
-$func$
-DECLARE
-  a text[] := '{Pedro, Carlos, Joaquim, João, Lúcia, Maria, Ana}';
-BEGIN
-  RETURN a[floor((random()*7+1))::int];
-END
-$func$ LANGUAGE plpgsql VOLATILE;
 
 -- DEMANDS
 INSERT INTO "demand" (
@@ -185,3 +174,42 @@ INSERT INTO "demand_blood" (
     'AB-',
     trunc(RANDOM()*10+1)
 FROM GENERATE_SERIES(5,10) iter;
+
+-- RANDOM BLOOD_TYPE
+
+CREATE FUNCTION random_blood_type()
+  RETURNS blood_types AS
+$func$
+DECLARE
+  a blood_types[] := '{A+, A-, B+, B-, AB+, AB-, O+, O-}';
+BEGIN
+  RETURN a[floor((random()*8+1))::int];
+END
+$func$ LANGUAGE plpgsql VOLATILE;
+
+CREATE FUNCTION random_donation_status()
+  RETURNS donation_status AS
+$func$
+DECLARE
+  a donation_status[] := '{pending, completed}';
+BEGIN
+  RETURN a[floor((random()*2+1))::int];
+END
+$func$ LANGUAGE plpgsql VOLATILE;
+
+
+-- DONATIONS
+
+INSERT INTO "donation" (
+    "uuid",
+    "blood_center_id",
+    "user_id",
+    "blood_type",
+    "status"
+) SELECT
+    uuid_generate_v4(),
+    trunc(RANDOM()*5+1),
+    trunc(RANDOM()*4+1),
+    random_blood_type(),
+    random_donation_status()
+FROM GENERATE_SERIES(1,20);

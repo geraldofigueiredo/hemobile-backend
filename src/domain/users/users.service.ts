@@ -15,7 +15,7 @@ import errors from 'src/common/constants/errors';
 
 @Injectable()
 export class UsersService {
-  salt: string;
+  salt: number;
 
   constructor(@InjectRepository(User) private readonly repo: Repository<User>) {
     this.salt = configService.getCryptSalt();

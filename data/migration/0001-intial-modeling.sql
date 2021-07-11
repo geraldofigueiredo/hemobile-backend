@@ -60,14 +60,15 @@ CREATE TABLE "demand_blood" (
 CREATE TABLE "donation" (
     "id" SERIAL PRIMARY KEY,
     "uuid" TEXT NOT NULL,
-    "demand_blood_id" INT NOT NULL,
+    "blood_center_id" INT NOT NULL,
     "user_id" INT NOT NULL,
+    "blood_type" blood_types NOT NULL,
     "status" donation_status NOT NULL DEFAULT 'pending',
     "created_at" DATE NOT NULL DEFAULT CURRENT_DATE,
     "updated_at" DATE NOT NULL DEFAULT CURRENT_DATE,
 
-    constraint donation_demand_blood_id_fk
-		foreign key (demand_blood_id) references demand_blood (id),
+    constraint donation_blood_center_id_fk
+		foreign key (blood_center_id) references blood_center (id),
     constraint donation_user_id_fk
 		foreign key (user_id) references "user" (id)
 );
