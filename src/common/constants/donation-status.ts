@@ -1,6 +1,6 @@
 enum DonationStatus {
   PENDING = 'pending',
-  FULLFILLED = 'fullfiled',
+  SUCCESSFUL = 'successful',
 }
 
 export default DonationStatus;

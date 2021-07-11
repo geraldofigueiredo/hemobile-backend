@@ -30,7 +30,7 @@ export class BloodCenterResponseDto extends OmitType(BloodCenter, [
 
       demand.demandBloods.forEach((demandBlood) => {
         this.collected += demandBlood.donations.reduce(
-          (a, b) => a + (b.status == DonationStatus.FULLFILLED ? 1 : 0),
+          (a, b) => a + (b.status == DonationStatus.SUCCESSFUL ? 1 : 0),
           0,
         );
 
