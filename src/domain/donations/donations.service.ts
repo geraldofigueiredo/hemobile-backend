@@ -35,6 +35,7 @@ export class DonationsService {
         },
         status: DonationStatus.COMPLETED,
       },
+      relations: ['bloodCenter'],
     });
   }
 
