@@ -24,7 +24,7 @@ export class DonationsController {
 
   @Get('/appointments/:uuid')
   async findAppointments(@Param('uuid') userUuid: string) {
-    const donations = await this.donationsService.findAppointments(userUuid);
-    return donations.map((donation) => new DonationResponseDto(donation));
+    const donation = await this.donationsService.findAppointments(userUuid);
+    return new DonationResponseDto(donation);
   }
 }

@@ -46,6 +46,17 @@ export class DonationsService {
     }
 
     try {
+      await this.repo.delete({
+        user: { id: user.id },
+        status: DonationStatus.PENDING,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(
+        errors.DONATION.ERROR_CREATE_DONATION,
+      );
+    }
+
+    try {
       const response = await this.repo
         .createQueryBuilder()
         .insert()
@@ -89,7 +100,7 @@ export class DonationsService {
       throw new InternalServerErrorException(errors.USERS.USER_NOT_FOUND);
     }
 
-    return this.repo.find({
+    return this.repo.findOne({
       where: {
         user: {
           id: user.id,
