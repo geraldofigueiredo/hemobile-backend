@@ -36,7 +36,7 @@ export class UsersService {
         .createQueryBuilder()
         .insert()
         .into(User)
-        .values([createUserDto])
+        .values([newUser])
         .execute();
 
       return response;
