@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import DonationStatus from 'src/common/constants/donation-status';
 import errors from 'src/common/constants/errors';
 import { Repository } from 'typeorm';
+import { BloodCentersService } from '../blood-centers/blood-centers.service';
 import { UsersService } from '../users/users.service';
 import { CreateDonationDto } from './dto/create-donation.dto';
 import { Donation } from './entities/donation.entity';
@@ -16,10 +17,53 @@ export class DonationsService {
   constructor(
     @InjectRepository(Donation) private readonly repo: Repository<Donation>,
     @Inject(UsersService) private readonly usersService: UsersService,
+    @Inject(BloodCentersService)
+    private readonly blodCenterService: BloodCentersService,
   ) {}
 
-  create(createDonationDto: CreateDonationDto) {
-    return 'This action adds a new donation';
+  async findByID(id: string): Promise<Donation> {
+    return this.repo.findOne({
+      where: {
+        id: id,
+      },
+      relations: ['bloodCenter'],
+    });
+  }
+
+  async create(createDonationDto: CreateDonationDto) {
+    const bloodCenter = await this.blodCenterService.findOne(
+      createDonationDto.bloodCenterUuid,
+    );
+    if (!bloodCenter) {
+      throw new InternalServerErrorException(
+        errors.BLOOD_CENTER.BLOOD_CENTER_NOT_FOUND,
+      );
+    }
+
+    const user = await this.usersService.findByUUID(createDonationDto.userUuid);
+    if (!user) {
+      throw new InternalServerErrorException(errors.USERS.USER_NOT_FOUND);
+    }
+
+    try {
+      const response = await this.repo
+        .createQueryBuilder()
+        .insert()
+        .into(Donation)
+        .values({
+          bloodCenter: bloodCenter,
+          user: user,
+          status: DonationStatus.PENDING,
+          bloodType: user.bloodType,
+        })
+        .execute();
+
+      return response;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        errors.DONATION.ERROR_CREATE_DONATION,
+      );
+    }
   }
 
   async findHistory(userUuid: string) {

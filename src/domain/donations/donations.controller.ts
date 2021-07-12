@@ -8,8 +8,12 @@ export class DonationsController {
   constructor(private readonly donationsService: DonationsService) {}
 
   @Post()
-  create(@Body() createDonationDto: CreateDonationDto) {
-    return this.donationsService.create(createDonationDto);
+  async create(@Body() createDonationDto: CreateDonationDto) {
+    const createResult = await this.donationsService.create(createDonationDto);
+    const donation = await this.donationsService.findByID(
+      createResult.identifiers[0].id,
+    );
+    return new DonationResponseDto(donation);
   }
 
   @Get('/history/:uuid')

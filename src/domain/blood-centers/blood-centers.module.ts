@@ -8,5 +8,6 @@ import { BloodCenter } from './entities/blood-center.entity';
   imports: [TypeOrmModule.forFeature([BloodCenter])],
   controllers: [BloodCentersController],
   providers: [BloodCentersService],
+  exports: [BloodCentersService],
 })
 export class BloodCentersModule {}

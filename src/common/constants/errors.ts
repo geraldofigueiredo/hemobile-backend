@@ -27,6 +27,12 @@ const errors = {
       message: 'hemocentro não encontrado',
     },
   },
+  DONATION: {
+    ERROR_CREATE_DONATION: {
+      name: 'ERROR_CREATE_DONATION',
+      message: 'erro ao marcar doação',
+    },
+  },
 };
 
 export default errors;
