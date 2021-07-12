@@ -15,5 +15,6 @@ export class UserResponseDto extends OmitType(User, [
     this.naturality = user.naturality;
     this.name = user.name;
     this.uuid = user.uuid;
+    this.donorNumber = user.donorNumber;
   }
 }

@@ -23,7 +23,7 @@ export class UsersController {
     const user = await this.usersService.findByID(
       createResult.identifiers[0].id,
     );
-    return { uuid: user.uuid };
+    return new UserResponseDto(user);
   }
 
   @Get(':uuid')
