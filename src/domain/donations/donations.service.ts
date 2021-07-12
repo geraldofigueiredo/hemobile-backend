@@ -52,6 +52,7 @@ export class DonationsService {
         },
         status: DonationStatus.PENDING,
       },
+      relations: ['bloodCenter'],
     });
   }
 }
