@@ -1,3 +1,14 @@
+# Hemobile
+
+Um aplicativo para facilitar a doação de sangue.
+
+Veja também:<br>
+- [Repositório front-end](https://github.com/diegolrs/hemobile-frontend)<br>
+- [Marco do projeto](https://github.com/diegolrs/hemobile-frontend/blob/master/Resources/hemobile%20-%20testes.pdf)<br>
+- [Testes](https://github.com/diegolrs/hemobile-frontend/blob/master/Resources/hemobile%20-%20testes.pdf)
+
+![](https://github.com/diegolrs/hemobile-frontend/blob/master/Resources/Marco%20III%20Hemobile%20-%20LinQ%20(1).png)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
@@ -71,3 +82,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+<p align="center">
+  <a>Criado por</a>
+  <a href="https://github.com/diegolrs">Diego Reis</a>, 
+  <a href="https://github.com/geraldofigueiredo">Geraldo Figueiredo</a>,
+  <a href="https://github.com/kleanlins">Cleanderson Lins</a> e
+  <a href="https://github.com/wagnerdgarcia">Wagner Garcia</a>.
+</p>
