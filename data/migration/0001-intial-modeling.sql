@@ -64,6 +64,7 @@ CREATE TABLE "donation" (
     "user_id" INT NOT NULL,
     "blood_type" blood_types NOT NULL,
     "status" donation_status NOT NULL DEFAULT 'pending',
+    "date" TEXT NOT NULL,
     "created_at" DATE NOT NULL DEFAULT CURRENT_DATE,
     "updated_at" DATE NOT NULL DEFAULT CURRENT_DATE,
 

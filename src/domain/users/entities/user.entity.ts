@@ -24,7 +24,7 @@ export class User extends BaseEntity {
   cpf: string;
 
   @Column({ name: 'donor_number' })
-  donorNumber: string;
+  donorNumber: number;
 
   @OneToMany(() => Donation, (donation) => donation.user)
   donations: Donation[];

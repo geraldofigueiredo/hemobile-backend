@@ -26,10 +26,10 @@ export class UsersService {
       throw new UnprocessableEntityException(errors.USERS.EMAIL_ALREADY_EXISTS);
     }
 
-    createUserDto.password = await bcrypt.hash(
-      createUserDto.password,
-      this.salt,
-    );
+    const newUser = new User();
+    Object.assign(newUser, createUserDto);
+    newUser.password = await bcrypt.hash(createUserDto.password, this.salt);
+    newUser.donorNumber = Math.floor(Math.random() * 100000000);
 
     try {
       const response = await this.repo

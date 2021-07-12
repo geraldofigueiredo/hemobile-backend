@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsNumber,
   IsNumberString,
   IsOptional,
   IsString,
@@ -24,10 +25,6 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   name: string;
-
-  @IsOptional()
-  @IsString()
-  donorNumber: string;
 
   @IsOptional()
   @IsString()

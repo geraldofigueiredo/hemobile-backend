@@ -14,6 +14,7 @@ export class DonationResponseDto extends OmitType(Donation, [
     super();
     this.uuid = donation.uuid;
     this.status = donation.status;
+    this.date = donation.date;
     this.bloodCenterName = donation.bloodCenter.name;
   }
 }

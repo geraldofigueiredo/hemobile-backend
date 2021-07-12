@@ -13,6 +13,9 @@ export class Donation extends BaseEntity {
   @Column({ name: 'blood_type' })
   bloodType: BloodTypes;
 
+  @Column({ name: 'date' })
+  date: string;
+
   @ManyToOne(() => BloodCenter, (bloodCenter) => bloodCenter.donations)
   @JoinColumn({ name: 'blood_center_id' })
   bloodCenter: BloodCenter;
